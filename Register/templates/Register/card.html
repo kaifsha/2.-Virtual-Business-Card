@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DetailsPage</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* Added for better visualization */
+        }
+
+        .card {
+            position: relative;
+            width: 250px;
+            height: 360px;
+            border-radius: 10px;
+            perspective: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+
+        .card .face {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 13px;
+            backface-visibility: hidden;
+            transition: transform 0.5s;
+            display: flex;
+            border-radius: 10px;
+            flex-direction: column;
+            align-items: center;
+            border:2px solid #00ffff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            
+        }
+
+        .card .face.front {
+            background: #fff;
+            transform: rotateY(0deg);
+        }
+
+        .card .face.back {
+            background: #fff;
+            color: #000;
+            display:flex;
+            justify-content: center;
+            align-items=center;
+            position: relative;
+            transform: rotateY(180deg);
+        }
+
+        .card:hover .face.front {
+            transform: rotateY(-180deg);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            
+        }
+
+        .card:hover .face.back {
+            transform: rotateY(0deg);
+            border:2px solid #00ffff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        .fields {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+        }
+        
+        .field {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 10px; /* Spacing between fields */
+        }
+        
+        .field span:first-child {
+            width: 100px; /* Adjust as needed */
+            text-align: left;
+            margin-left: 20px; /* Adjust as needed */
+            
+        }
+        
+    
+
+        .face.front img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            
+        }
+
+       
+        .face.back img{
+            width:120px;
+            height:120px;
+            position: absolute;
+            top: 35%;
+            left:30%; 
+        }
+        .desi h5{
+            margin-top: -4px;
+        }
+        span{
+            font-size: 13px;
+        }
+        .register{
+            width: 100px;;
+            text-align: left;  
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="face front">
+            <h2>Oratech solutions</h2>
+            <img src="{{ registers.Photo.url }}" alt="Register Photo">
+            <h3>{{ registers.Name }}</h3>
+            <div class="desi">
+                <h5>{{ registers.Designation }}</h5>
+            </div>
+            
+            <div class="fields">
+                <div class="field">
+                    <span>Age :</span>
+                    <span class="register">{{ registers.Age }}</span>
+                </div>
+                <div class="field">
+                    <span>Email :</span>
+                    <span class="register">{{ registers.Email }}</span>
+                </div>
+                <div class="field">
+                    <span>Mobile :</span>
+                    <span class="registers">{{ registers.PhoneNum }}</span>
+                </div>
+            </div>
+        </div>
+      <div class="face back">
+            <img src="{% url 'qr_code' registers.id %}" alt="QR Code">
+
+        </div> 
+    </div>
+</body>
+</html>
